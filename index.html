@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Trading Journal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="hero">
+    <h1>Trading Journal</h1>
+    <p>Disiplin. Data. Kesadaran Diri.</p>
+
+    <div class="menu">
+      <a href="jurnal.html">📘 Jurnal</a>
+      <a href="statistik.html">📊 Statistik</a>
+      <a href="portofolio.html">💼 Portofolio</a>
+    </div>
+  </div>
+
+  <script src="js/stars.js"></script>
+</body>
+</html>
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for (let i = 0; i < 120; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    speed: Math.random() * 2 + 0.5,
+    size: Math.random() * 2
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    s.y += s.speed;
+    s.x -= s.speed;
+
+    if (s.y > canvas.height) {
+      s.y = 0;
+      s.x = Math.random() * canvas.width;
+    }
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+  body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: black;
+  color: white;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.hero {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu a {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 20px;
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.menu a:hover {
+  background: white;
+  color: black;
+}
+
+<h2>Jurnal Trading</h2>
+
+<form>
+  <label>Tanggal</label>
+  <input type="date">
+
+  <label>Pair</label>
+  <input type="text">
+
+  <label>Setup</label>
+  <input type="text">
+
+  <label>Risk (%)</label>
+  <input type="number">
+
+  <label>Hasil</label>
+  <select>
+    <option>Win</option>
+    <option>Loss</option>
+  </select>
+
+  <label>Catatan Psikologi</label>
+  <textarea></textarea>
+
+  <button>Simpan</button>
+</form>
+<h2>Statistik Trading</h2>
+
+<ul>
+  <li>Total Trade: 120</li>
+  <li>Winrate: 58%</li>
+  <li>RR Average: 1:2.5</li>
+  <li>Max Loss Harian: -1%</li>
+</ul>
+<h2>Portofolio Trading</h2>
+
+<div class="profile">
+  <img src="assets/profile.jpg" width="120">
+  <h3>Nama Trader</h3>
+  <p>Intraday Trader • Risk ≤ 1%</p>
+  <p>Fokus disiplin & konsistensi</p>
+</div>
+
+<hr>
+
+<ul>
+  <li>📈 Januari: +6%</li>
+  <li>📈 Februari: +4%</li>
+  <li>📉 Maret: -1%</li>
+</ul>
+
